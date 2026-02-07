@@ -1,0 +1,34 @@
+public  class GitHubTest {
+
+    // Method to get GitHub user info
+    public static String getUserInfo() {
+        try {
+            Http http = new Http();
+            HttpRequest req = new HttpRequest();
+
+            // Use Legacy Named Credential
+            req.setEndpoint('callout:GitHub_API_Legacy/user');
+            req.setMethod('GET');
+
+            // Add your GitHub Personal Access Token here
+            req.setHeader('Authorization', 'Bearer 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');
+            req.setHeader('Accept', 'application/vnd.github+json');
+
+            HttpResponse res = http.send(req);
+
+            System.debug('Status Code: ' + res.getStatusCode());
+            System.debug('Response Body: ' + res.getBody());
+            syste,.debug('Printing my name');
+
+            if(res.getStatusCode() == 200){
+                return res.getBody();
+            } else {
+                return 'Error: ' + res.getStatusCode() + ' - ' + res.getBody();
+            }
+
+        } catch (Exception e) {
+            System.debug('Exception: ' + e.getMessage());
+            return 'Exception: ' + e.getMessage();
+        }
+    }
+}
